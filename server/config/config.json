@@ -1,0 +1,10 @@
+{
+  "test" :{
+    "PORT": 3000,
+    "MONGODB_URI":"mongodb://itai4242:itai3027@ds121475.mlab.com:21475/itaiexc"
+  },
+  "development":{
+    "PORT": 3000,
+    "MONGODB_URI":"mongodb://itai4242:itai3027@ds121475.mlab.com:21475/itaiexc"
+  }
+}

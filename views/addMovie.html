@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Add movie to database</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" >
+        <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+        crossorigin="anonymous"
+        >
+    </head>
+    <body>
+        <div class="container text-center">
+            <p>Please enter amovie to the databse</p>
+            <form id="insert-movie" method="POST">
+                <input type="text" name="name"/>
+                <select name="genre">
+                    <option value="comedy">Comedy</option>
+                    <option value="horor">Horor</option>
+                    <option value="drama">Drama</option>
+                    <option value="scifi">Sience Fiction</option>
+                    <option value="doco">Docomentury</option>
+                </select>
+                <input type="number" name="year">
+                <button class="btn btn-primary">Submit</button>
+            </form>
+            <a href="/"><button class="btn btn-primary">Home Page</button></a>
+        </div>
+
+
+        <script>
+        // var data=Http.responseText;
+        // var jsonResponse = JSON.parse(data);
+        // console.log(jsonResponse["Data"]);
+        // var name = "{{ name }}";
+        // alert(name);
+        </script>
+    </body>
+</html>
