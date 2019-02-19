@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Search for movies</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" >
+        <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+        crossorigin="anonymous"
+        >
+    </head>
+    <body>
+      <script src="/js/libs/jquery-3.1.0.min.js"></script>
+        <div class="container text-center">
+            <p>search for movie</p>
+            <form id="searchfor">
+                    <select name="genreName" id="name3">
+                        <option value="comedy">Comedy</option>
+                        <option value="horor">Horor</option>
+                        <option value="drama">Drama</option>
+                        <option value="scifi">Sience Fiction</option>
+                        <option value="doco">Docomentury</option>
+                    </select>
+                    <input type="number" id="yearStart">
+                    <input type="number" id="yearEnd">
+                    <button class="btn btn-primary">Submit</button>
+                </form>
+
+                <div id="moviessearch"></div>
+                <script>
+                var testForm = document.getElementById('searchfor');
+                testForm.onsubmit = function(event) {
+                  event.preventDefault();
+
+                  var request = new XMLHttpRequest();
+                  // POST to httpbin which returns the POST data as JSON
+                  request.open('POST', '/search.html', true);
+                  request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8')
+                  // var formData = new FormData(document.getElementById('test-form'));
+                    var genre = document.getElementById("name3").value
+                    var yearStart = document.getElementById("yearStart").value
+                    var yearEnd = document.getElementById("yearEnd").value
+                    // var params = `name=${name}&genre=${genre}&year=${year}`;
+                    body={genre,yearStart,yearEnd}
+                    // console.log(JSON.stringify(body))
+                  // request.send(params);
+                  request.onreadystatechange =function(){
+                    if(this.readyState===XMLHttpRequest.DONE){
+                      if(this.status===200){
+                        var data = request.response
+                        var movies= JSON.parse(data)
+                        // console.log(movies)
+                        var ol = jQuery('<ol></ol>');
+                        movies.forEach(function (movie) {
+                          ol.append(jQuery('<li></li>').text(`${movie.name}:, rating:${movie.rating}`));
+                        });
+
+                        jQuery('#moviessearch').html(ol);
+                      }else{
+                        var view = request.responseText;
+                        alert (view)
+                      }
+                    }
+                  }
+                  request.send(JSON.stringify(body))
+                  // console.log(formData);
+                  // console.log(document.getElementById("name1").value)
+                }
+                </script>
+                <a href="/"><button class="btn btn-primary">Home Page</button></a>
+        </div>
+
+    </body>
+</html>

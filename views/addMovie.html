@@ -1,6 +1,48 @@
 <!DOCTYPE html>
 <html>
     <head>
+      <script>
+      // function sendData(){
+      // function {
+      //   var name = document.getElementById("name").value
+      //   var genre = document.getElementById("genre").value
+      //   var year = document.getElementById("year").value
+      //   var http = new XMLHttpRequest();
+      //   // var formData = new FormData( document.getElementById("my-form-id") );
+      //   // console.log(formData)
+      //   var url = '/addMovie.html';
+      //   var params = `name=${name}&genre=${genre}&year=${year}`;
+      //   console.log(params)
+      //   http.open('POST', url, true);
+      //
+      //   //Send the proper header information along with the request
+      //   http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      //
+      //   http.onreadystatechange = function() {//Call a function when the state changes.
+      //       if(http.readyState == 4 && http.status == 200) {
+      //           var data = http.responseText;
+      //           var jso =JSON.parse(data);
+      //           alert(jso.name)
+      //       }
+      //   }
+      //   http.send(params);
+      // }
+
+      // }
+      // function sendForm(form) {
+      // var formData = new FormData(form);
+      //
+      // // formData.append('secret_token', '1234567890'); // Append extra data before send.
+      //
+      // var xhr = new XMLHttpRequest();
+      // xhr.open('POST',form.action, true);
+      // xhr.onload = function(e) { ... };
+      //
+//       // xhr.send(formData);
+//
+//   return false; // Prevent page from submitting.
+// }
+      </script>
         <meta charset="utf-8">
         <title>Add movie to database</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" >
@@ -13,24 +55,59 @@
     <body>
         <div class="container text-center">
             <p>Please enter amovie to the databse</p>
-            <form id="insert-movie" method="POST">
-                <input type="text" name="name"/>
-                <select name="genre">
+            <form id="test-form">
+                <input type="text" name="name" id="name1"/>
+                <select name="genre" id=genre1>
                     <option value="comedy">Comedy</option>
                     <option value="horor">Horor</option>
                     <option value="drama">Drama</option>
                     <option value="scifi">Sience Fiction</option>
                     <option value="doco">Docomentury</option>
                 </select>
-                <input type="number" name="year">
-                <button class="btn btn-primary">Submit</button>
+                <input type="number" name="year" id="year1" />
+                <input type='submit'>
+
             </form>
+            <script>
+            var testForm = document.getElementById('test-form');
+            testForm.onsubmit = function(event) {
+              event.preventDefault();
+
+              var request = new XMLHttpRequest();
+              // POST to httpbin which returns the POST data as JSON
+              request.open('POST', '/addMovie.html', true);
+              request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8')
+              // var formData = new FormData(document.getElementById('test-form'));
+                var name = document.getElementById("name1").value
+                var genre = document.getElementById("genre1").value
+                var year = document.getElementById("year1").value
+                // var params = `name=${name}&genre=${genre}&year=${year}`;
+                body={name,genre,year}
+                // console.log(JSON.stringify(body))
+              // request.send(params);
+              request.onreadystatechange =function(){
+                if(this.readyState===XMLHttpRequest.DONE&&this.status===200){
+                  var view = request.responseText;
+                  // var str = JSON.parse(view);
+                  alert (view)
+                }
+              }
+              request.send(JSON.stringify(body))
+              // console.log(formData);
+              // console.log(document.getElementById("name1").value)
+            }
+            </script>
             <a href="/"><button class="btn btn-primary">Home Page</button></a>
         </div>
 
 
         <script>
-        // var data=Http.responseText;
+//         console.log(window.location.href)
+//         $('select').change(function() {
+//     console.log($(this).val())
+// })
+
+        // // var data=Http.responseText;
         // var jsonResponse = JSON.parse(data);
         // console.log(jsonResponse["Data"]);
         // var name = "{{ name }}";

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Update rating</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" >
+        <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+        crossorigin="anonymous"
+        >
+    </head>
+    <body>
+        <div class="container text-center">
+            <p>please enter your grade to a movie</p>
+            <form id="insert-rating">
+                <input type="text" name="movie-name" id="name2"/>
+                <input type="number" name="rating1" id="rating"/>
+                <input type='submit'>
+            </form>
+            <script>
+            var testForm = document.getElementById("insert-rating");
+            testForm.onsubmit = function(event) {
+              event.preventDefault();
+
+              var request = new XMLHttpRequest();
+              // POST to httpbin which returns the POST data as JSON
+              request.open('PATCH', '/addRating.html', true);
+              request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8')
+              // var formData = new FormData(document.getElementById('test-form'));
+                var name = document.getElementById("name2").value
+                var rating = document.getElementById("rating").value
+                // var params = `name=${name}&genre=${genre}&year=${year}`;
+                body={name,rating}
+                // console.log(JSON.stringify(body))
+              // request.send(params);
+              request.onreadystatechange =function(){
+                if(this.readyState===XMLHttpRequest.DONE&&this.status===200){
+                  var view = request.responseText;
+                  // var str = JSON.parse(view);
+                  alert (view)
+                }
+              }
+              request.send(JSON.stringify(body))
+              // console.log(formData);
+              // console.log(document.getElementById("name1").value)
+            }
+            </script>
+            <a href="/"><button class="btn btn-primary">Home Page</button></a>
+        </div>
+
+    </body>
+</html>
